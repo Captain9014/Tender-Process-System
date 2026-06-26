@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container mt-5">
+
+<div class="card shadow p-4">
+
+<h1 class="mb-4">
+
+Submit Bid
+
+</h1>
+
+<form method="POST">
+
+{% csrf_token %}
+
+{{form.as_p}}
+
+<button type="submit" class="btn btn-primary">
+
+Submit Bid
+
+</button>
+
+</form>
+
+</div>
+
+</div>
+
+{% endblock %}

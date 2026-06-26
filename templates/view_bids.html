@@ -1,0 +1,79 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card-box">
+
+    <h2 class="mb-4">Builder Bids</h2>
+
+    <table class="table">
+
+        <tr>
+
+            <th>Builder</th>
+
+            <th>Amount</th>
+
+            <th>Duration</th>
+
+            <th>Action</th>
+
+        </tr>
+
+        {% for bid in bids %}
+
+        <tr>
+
+            <td>
+
+                {{bid.builder.username}}
+
+                <br>
+
+               
+
+            </td>
+
+            <td>₹{{bid.amount}}</td>
+
+            <td>{{bid.duration}} Days</td>
+
+            <td>
+                 <a href="/profile/{{bid.builder.id}}/" class="btn btn-sm btn-info mt-2">
+
+                    View Profile
+
+                </a>
+
+                <a href="/select-builder/{{bid.id}}/" class="btn btn-success">
+
+                    Select Builder
+
+                </a>
+
+
+
+                {% if bid.tender.status == 'completed' %}
+
+<a href="/give-review/{{bid.id}}/"
+   class="btn btn-warning mt-2">
+
+    Give Review
+
+</a>
+
+{% endif %}
+
+
+            </td>
+
+        </tr>
+    
+
+        {% endfor %}
+
+    </table>
+
+</div>
+
+{% endblock %}

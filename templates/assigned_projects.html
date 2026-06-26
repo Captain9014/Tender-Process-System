@@ -1,0 +1,352 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<br>
+
+<div class="container-fluid px-4">
+
+    <!-- PAGE HEADER -->
+
+    <div class="project-header mb-5">
+
+        <div>
+            <h1 class="fw-bold">
+                🏗 Assigned Projects
+            </h1>
+
+            <p class="text-light mb-0">
+                Manage approved projects, track progress and communicate with clients.
+            </p>
+        </div>
+
+        <div class="header-badge">
+            {{ bids|length }} Active Projects
+        </div>
+
+    </div>
+
+    <div class="row g-4">
+
+        {% for bid in bids %}
+
+        <div class="col-lg-6">
+
+            <div class="project-card">
+
+                <div class="d-flex justify-content-between align-items-center">
+
+                    <div>
+
+                        <h3 class="fw-bold">
+                            🏗 {{ bid.tender.title }}
+                        </h3>
+
+                        <p class="text-muted mb-0">
+                            Construction Project
+                        </p>
+
+                    </div>
+
+                    <span class="badge bg-success px-3 py-2">
+                        Active
+                    </span>
+
+                </div>
+
+                <hr>
+
+                <div class="row">
+
+                    <div class="col-md-6">
+
+                        <p>
+                            <strong>👤 Client:</strong>
+                            {{ bid.tender.client.username }}
+                        </p>
+
+                    </div>
+
+                    <div class="col-md-6 text-md-end">
+
+                        <a href="/profile/{{bid.tender.client.id}}/" class="btn btn-info btn-sm">
+
+                            View Client
+
+                        </a>
+
+                    </div>
+
+                </div>
+
+                <p class="project-description">
+
+                    {{ bid.tender.description }}
+
+                </p>
+
+                <!-- PROGRESS -->
+
+                <div class="mt-3">
+
+                    <div class="d-flex justify-content-between">
+
+                        <small>Project Progress</small>
+
+                        <small>
+                            {% if bid.latest_progress %}
+                            {{ bid.latest_progress.progress }}%
+                            {% else %}
+                            0%
+                            {% endif %}
+                        </small>
+
+                    </div>
+
+                    <div class="progress">
+
+                        {% if bid.latest_progress %}
+
+                        <div class="progress-bar bg-success" style="width: {{ bid.latest_progress.progress }}%;">
+
+                            {{ bid.latest_progress.progress }}%
+
+                        </div>
+
+                        {% else %}
+
+                        <div class="progress-bar bg-success" style="width: 0%;">
+
+                            0%
+
+                        </div>
+
+                        {% endif %}
+
+                    </div>
+
+                </div>
+
+                <div class="row mt-4">
+
+                    <div class="col-4">
+
+                        <small class="text-muted">
+                            Budget
+                        </small>
+
+                        <h6 class="fw-bold text-success">
+
+                            ₹{{ bid.tender.budget }}
+
+                        </h6>
+
+                    </div>
+
+                    <div class="col-4">
+
+                        <small class="text-muted">
+                            Location
+                        </small>
+
+                        <h6 class="fw-bold">
+
+                            {{ bid.tender.location }}
+
+                        </h6>
+
+                    </div>
+
+                    <div class="col-4">
+
+                        <small class="text-muted">
+                            Deadline
+                        </small>
+
+                        <h6 class="fw-bold text-danger">
+
+                            {{ bid.tender.deadline }}
+
+                        </h6>
+
+                    </div>
+
+                </div>
+
+                <hr>
+
+                <div class="d-flex flex-wrap gap-2">
+
+                    <a href="/chat-room/{{bid.tender.id}}/" class="btn btn-primary">
+
+                        💬 Chat
+
+                    </a>
+
+                    <a href="/project-progress/{{bid.tender.id}}/" class="btn btn-success">
+
+                        Progress
+
+                    </a>
+
+                    <a href="/upload-file/{{bid.tender.id}}/" class="btn btn-dark">
+
+                        📁 Files
+
+                    </a>
+                    <a href="/update-progress/{{bid.tender.id}}/" class="btn btn-warning">
+                        📈 Update Progress
+                    </a>
+
+                </div>
+
+            </div>
+
+        </div>
+
+        {% empty %}
+
+        <div class="col-12">
+
+            <div class="project-card text-center p-5">
+
+                <h3>
+                    No Assigned Projects
+                </h3>
+
+                <p class="text-muted">
+                    No projects have been assigned yet.
+                </p>
+               
+            </div>
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<style>
+    body {
+        background: #eef2f7;
+    }
+
+    .project-header {
+
+        background: linear-gradient(135deg,
+                #0f172a,
+                #1e3a8a);
+
+        color: white;
+
+        border-radius: 25px;
+
+        padding: 35px;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+    }
+
+    .header-badge {
+
+        background: white;
+
+        color: #1e3a8a;
+
+        padding: 12px 20px;
+
+        border-radius: 12px;
+
+        font-weight: bold;
+
+    }
+
+    .stat-card {
+
+        background: white;
+
+        border-radius: 20px;
+
+        padding: 30px;
+
+        text-align: center;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+    }
+
+    .stat-card h2 {
+
+        color: #0d6efd;
+
+        font-size: 40px;
+
+        font-weight: bold;
+
+    }
+
+    .project-card {
+
+        background: white;
+
+        border-radius: 20px;
+
+        padding: 25px;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.08);
+
+        transition: 0.3s;
+
+        height: 100%;
+
+    }
+
+    .project-card:hover {
+
+        transform: translateY(-6px);
+
+    }
+
+    .project-description {
+
+        color: #666;
+
+        line-height: 1.7;
+
+    }
+
+    .progress {
+
+        height: 10px;
+
+        border-radius: 20px;
+
+    }
+
+    .btn {
+
+        border-radius: 10px;
+
+    }
+
+    @media(max-width:768px) {
+
+        .project-header {
+
+            flex-direction: column;
+
+            gap: 20px;
+
+            text-align: center;
+
+        }
+
+    }
+</style>
+
+{% endblock %}

@@ -1,0 +1,417 @@
+{% extends 'base.html' %}
+
+{% block navbar %}
+{% endblock %}
+
+{% block content %}
+
+
+
+<!-- HERO SECTION -->
+
+<div class="hero-section">
+
+    <div class="hero-overlay">
+
+        <div class="hero-content">
+
+            <h1>
+                Smart Tender Management System
+            </h1>
+
+            <p>
+                Create tenders, receive bids from professional builders,
+                track project progress, exchange files and communicate
+                in real-time from one powerful platform.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/login/" class="btn btn-light btn-lg">
+
+                    Login
+
+                </a>
+
+                <a href="/register/" class="btn btn-primary btn-lg ms-3">
+
+                    Register
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- ABOUT SECTION -->
+
+<div class="container py-5">
+
+    <div class="row align-items-center">
+
+        <div class="col-lg-6">
+
+            <img
+                src="https://images.unsplash.com/photo-1503387762-592deb58ef4e"
+                class="about-img">
+
+        </div>
+
+        <div class="col-lg-6">
+
+            <h2 class="fw-bold mb-4">
+
+                About TenderPro
+
+            </h2>
+
+            <p class="about-text">
+
+                TenderPro is a smart digital platform designed for
+                construction project management. Clients can create
+                tenders, receive bids from builders, compare offers,
+                select the best builder and monitor project progress
+                throughout the project lifecycle.
+
+            </p>
+
+            <p class="about-text">
+
+                Builders can discover opportunities, submit bids,
+                upload project files, communicate with clients and
+                update project progress in real-time.
+
+            </p>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FEATURES -->
+
+<div class="feature-section">
+
+    <div class="container">
+
+        <h2 class="text-center fw-bold mb-5">
+
+            Powerful Features
+
+        </h2>
+
+        <div class="row g-4">
+
+            <div class="col-md-3">
+
+                <div class="feature-card">
+
+                    <div class="icon">
+
+                        📋
+
+                    </div>
+
+                    <h4>Create Tender</h4>
+
+                    <p>
+
+                        Clients can publish construction projects.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="feature-card">
+
+                    <div class="icon">
+
+                        💰
+
+                    </div>
+
+                    <h4>Bidding System</h4>
+
+                    <p>
+
+                        Builders can submit competitive bids.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="feature-card">
+
+                    <div class="icon">
+
+                        📈
+
+                    </div>
+
+                    <h4>Progress Tracking</h4>
+
+                    <p>
+
+                        Monitor project progress in real-time.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <div class="feature-card">
+
+                    <div class="icon">
+
+                        💬
+
+                    </div>
+
+                    <h4>Live Chat</h4>
+
+                    <p>
+
+                        Direct communication between users.
+
+                    </p>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+
+<!-- GALLERY -->
+
+<div class="gallery-section">
+
+    <div class="container">
+
+        <h2 class="text-center fw-bold mb-5">
+
+            Construction Projects
+
+        </h2>
+
+        <div class="row g-4">
+
+            <div class="col-md-4">
+
+                <img src="https://images.unsplash.com/photo-1541888946425-d81bb19240f5"
+                     class="gallery-img">
+
+            </div>
+
+            <div class="col-md-4">
+
+                <img src="https://images.unsplash.com/photo-1489515217757-5fd1be406fef"
+                     class="gallery-img">
+
+            </div>
+
+            <div class="col-md-4">
+
+                <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd"
+                     class="gallery-img">
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- STATS -->
+
+<div class="stats-section">
+
+    <div class="container">
+
+        <div class="row text-center">
+
+            <div class="col-md-3">
+
+                <h1>500+</h1>
+
+                <p>Projects</p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h1>100+</h1>
+
+                <p>Builders</p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h1>50+</h1>
+
+                <p>Clients</p>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <h1>1000+</h1>
+
+                <p>Bids</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<!-- FOOTER -->
+
+
+
+<style>
+
+.hero-section{
+height:100vh;
+background:url('https://images.unsplash.com/photo-1503387762-592deb58ef4e');
+background-size:cover;
+background-position:center;
+}
+
+.hero-overlay{
+height:100%;
+background:rgba(0,0,0,.65);
+display:flex;
+align-items:center;
+justify-content:center;
+text-align:center;
+padding:30px;
+}
+
+.hero-content{
+max-width:900px;
+color:white;
+}
+
+.hero-content h1{
+font-size:70px;
+font-weight:700;
+margin-bottom:25px;
+}
+
+.hero-content p{
+font-size:22px;
+line-height:1.8;
+margin-bottom:35px;
+}
+
+.about-img{
+width:100%;
+border-radius:25px;
+}
+
+.about-text{
+font-size:18px;
+line-height:1.9;
+color:#555;
+}
+
+.feature-section{
+background:#f8fafc;
+padding:80px 0;
+}
+
+.feature-card{
+background:white;
+padding:30px;
+border-radius:20px;
+text-align:center;
+height:100%;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.icon{
+font-size:50px;
+margin-bottom:20px;
+}
+
+.step-card{
+background:white;
+padding:30px;
+border-radius:20px;
+box-shadow:0 5px 20px rgba(0,0,0,.08);
+}
+
+.step-card h1{
+color:#2563eb;
+font-size:60px;
+}
+
+.gallery-section{
+padding:80px 0;
+background:white;
+}
+
+.gallery-img{
+width:100%;
+height:300px;
+object-fit:cover;
+border-radius:20px;
+}
+
+.stats-section{
+background:#1e3a8a;
+color:white;
+padding:80px 0;
+}
+
+.stats-section h1{
+font-size:55px;
+font-weight:bold;
+}
+
+.footer{
+background:#0f172a;
+color:white;
+padding:60px 0 20px;
+}
+
+@media(max-width:768px){
+
+.hero-content h1{
+font-size:40px;
+}
+
+.hero-content p{
+font-size:18px;
+}
+
+}
+
+</style>
+
+{% endblock %}

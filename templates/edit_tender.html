@@ -1,0 +1,25 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<head>
+<title>Edit Tender</title>
+</head>
+
+<body>
+
+<h1>Edit Tender</h1>
+
+<form method="POST">
+
+{% csrf_token %}
+
+{{ form.as_p }}
+
+<button type="submit">
+Update
+</button>
+
+</form>
+{% endblock %}
+</body>
+</html>

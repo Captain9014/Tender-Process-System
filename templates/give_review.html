@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container py-5">
+
+    <div class="row justify-content-center">
+
+        <div class="col-md-8">
+
+            <div class="review-card">
+
+                <div class="review-header">
+
+                    <h2>Rate Your Builder</h2>
+
+                    <p>
+                        Share your experience and help other clients choose the right builder.
+                    </p>
+
+                </div>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+                            Rating (1 - 5)
+                        </label>
+
+                        {{ form.rating }}
+
+                    </div>
+
+                    <div class="mb-4">
+
+                        <label class="form-label fw-bold">
+                            Review
+                        </label>
+
+                        {{ form.review }}
+
+                    </div>
+
+                    <button type="submit" class="btn btn-warning w-100 btn-lg">
+
+                         Submit Review
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+body{
+    background:#f4f7fc;
+}
+
+.review-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:40px;
+
+    box-shadow:0 8px 25px rgba(0,0,0,0.08);
+
+}
+
+.review-header{
+
+    text-align:center;
+
+    margin-bottom:30px;
+
+}
+
+.review-header h2{
+
+    font-weight:bold;
+
+    color:#0f172a;
+
+}
+
+.review-header p{
+
+    color:#64748b;
+
+}
+
+input,
+textarea,
+select{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+}
+
+textarea{
+
+    min-height:150px;
+
+}
+
+.btn-warning{
+
+    font-weight:bold;
+
+    border-radius:12px;
+
+}
+
+</style>
+
+{% endblock %}

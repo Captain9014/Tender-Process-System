@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card-box">
+
+    <h2>Project Progress</h2>
+
+    <hr>
+
+    {% for progress in progress_list %}
+
+    <div class="card-box mb-3">
+
+        <h4>
+
+            Progress :
+            {{progress.progress}}%
+
+        </h4>
+
+        <p>
+
+            {{progress.update_text}}
+
+        </p>
+
+        <small>
+
+            {{progress.created_at}}
+
+        </small>
+
+    </div>
+
+    {% empty %}
+
+    <h4>
+
+        No Progress Updates Yet
+
+    </h4>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

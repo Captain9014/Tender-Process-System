@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card-box">
+
+    <h2 class="mb-4">
+
+        Notifications
+
+    </h2>
+
+    {% for notification in notifications %}
+
+    <div style="padding:15px;border-bottom:1px solid #eee;">
+
+        <h5>
+
+            {{notification.message}}
+
+        </h5>
+
+        <small>
+
+            {{notification.created_at}}
+
+        </small>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

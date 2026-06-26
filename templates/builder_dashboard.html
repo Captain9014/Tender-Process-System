@@ -1,0 +1,500 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid px-4 py-4">
+
+    <!-- HERO SECTION -->
+
+    <div class="hero-section">
+
+        <div class="hero-content">
+
+            <h1>
+                Welcome Builder
+            </h1>
+
+            <p>
+                Manage assigned projects, submit bids, track progress,
+                upload files and communicate with clients from one dashboard.
+            </p>
+
+            <div class="hero-buttons">
+
+                <a href="/assigned-projects/" class="btn btn-primary btn-lg">
+
+                    🏗 Assigned Projects
+
+                </a>
+
+                <a href="/available-tenders/" class="btn btn-success btn-lg">
+
+                    📄 Find New Tenders
+
+                </a>
+
+            </div>
+
+        </div>
+
+        <div class="hero-image">
+
+            <img src="https://images.unsplash.com/photo-1504307651254-35680f356dfd?auto=format&fit=crop&w=1000&q=80">
+
+        </div>
+
+    </div>
+
+    <!-- STATISTICS -->
+
+    <div class="row g-4 mt-4">
+
+        <div class="col-md-3">
+
+            <div class="stat-card">
+
+                <h2>{{ assigned_count }}</h2>
+
+                <p>Assigned Projects</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="stat-card">
+
+                <h2>{{ active_bid_count }}</h2>
+
+                <p>Active Bids</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="stat-card">
+
+                <h2>{{ notification_count }}</h2>
+
+                <p>Notifications</p>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-3">
+
+            <div class="stat-card">
+
+                <h2>{{completed_projects}}</h2>
+
+                <p>Completed Projects</p>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- QUICK ACTIONS -->
+
+    <div class="section-box mt-5">
+
+        <h3 class="mb-4">
+            ⚡ Quick Actions
+        </h3>
+
+        <div class="row g-4">
+
+            <div class="col-md-3">
+
+                <a href="/available-tenders/" class="action-card">
+
+                    📄
+                    <h5>Available Tenders</h5>
+
+                </a>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <a href="/assigned-projects/" class="action-card">
+
+                    🏗
+                    <h5>Assigned Projects</h5>
+
+                </a>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <a href="/notifications/" class="action-card">
+
+                    🔔
+                    <h5>Notifications</h5>
+
+                </a>
+
+            </div>
+
+            <div class="col-md-3">
+
+                <a href="/profile/{{request.user.id}}/" class="action-card">
+
+                    👤
+                    <h5>Profile</h5>
+
+                </a>
+
+            </div>
+
+        </div>
+
+    </div>
+
+    <!-- ACTIVE PROJECTS -->
+
+    <div class="section-box mt-5">
+
+        <div class="d-flex justify-content-between mb-4">
+
+            <h3>
+                🏗 Active Projects
+            </h3>
+
+            <a href="/assigned-projects/" class="btn btn-primary">
+
+                View All
+
+            </a>
+
+        </div>
+
+        <div class="project-card">
+
+            {% for project in assigned_projects %}
+
+            <div class="project-card">
+
+                <h4>
+                    {{ project.tender.title }}
+                </h4>
+
+                <p>
+                    {{ project.tender.description }}
+                </p>
+
+            </div>
+
+            {% endfor %}
+
+            {% for project in assigned_projects %}
+
+            <div class="project-card">
+
+                <h4>
+                    {{ project.tender.title }}
+                </h4>
+
+                <p>
+                    {{ project.tender.description }}
+                </p>
+
+                {% with latest_progress=project.tender.progress_set.last %}
+
+                {% if latest_progress %}
+
+                <div class="progress">
+
+                    <div class="progress-bar bg-success" style="width:{{latest_progress.progress}}%">
+
+                        {{latest_progress.progress}}%
+
+                    </div>
+
+                </div>
+
+                {% endif %}
+
+                {% endwith %}
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- LATEST TENDERS -->
+
+    <div class="section-box mt-5">
+
+        <div class="d-flex justify-content-between mb-4">
+
+            <h3>
+                📄 Latest Available Tenders
+            </h3>
+
+            <a href="/available-tenders/" class="btn btn-success">
+
+                View All
+
+            </a>
+
+        </div>
+
+        <div class="project-card">
+
+            {% for tender in latest_tenders %}
+
+            <div class="project-card">
+
+                <h4>{{tender.title}}</h4>
+
+                <p>
+                    Budget ₹{{tender.budget}}
+                </p>
+
+                <p>
+                    {{tender.location}}
+                </p>
+
+            </div>
+
+            {% empty %}
+
+            <p>No Tender Available</p>
+
+            {% endfor %}
+
+        </div>
+
+    </div>
+
+    <!-- NOTIFICATIONS -->
+
+    <div class="section-box mt-5 mb-4">
+
+        <h3 class="mb-4">
+
+            🔔 Recent Notifications
+
+        </h3>
+
+        {% for notification in recent_notifications %}
+
+        <div class="notification-item">
+
+            {{notification.message}}
+
+        </div>
+
+        {% empty %}
+
+        <div class="notification-item">
+
+            No Notifications
+
+        </div>
+
+        {% endfor %}
+
+    </div>
+
+</div>
+
+<style>
+    body {
+        background: #f4f7fc;
+    }
+
+    /* HERO */
+
+    .hero-section {
+
+        background: white;
+
+        border-radius: 25px;
+
+        padding: 40px;
+
+        display: flex;
+
+        align-items: center;
+
+        justify-content: space-between;
+
+        gap: 40px;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+
+    }
+
+    .hero-content {
+        flex: 1;
+    }
+
+    .hero-content h1 {
+
+        font-size: 50px;
+
+        font-weight: 700;
+
+        color: #0f172a;
+
+    }
+
+    .hero-content p {
+
+        font-size: 18px;
+
+        color: #64748b;
+
+        margin: 20px 0;
+
+    }
+
+    .hero-image img {
+
+        width: 450px;
+
+        border-radius: 20px;
+
+    }
+
+    /* STATS */
+
+    .stat-card {
+
+        background: white;
+
+        padding: 30px;
+
+        text-align: center;
+
+        border-radius: 20px;
+
+        box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+
+    }
+
+    .stat-card h2 {
+
+        color: #2563eb;
+
+        font-size: 42px;
+
+        font-weight: bold;
+
+    }
+
+    /* SECTION */
+
+    .section-box {
+
+        background: white;
+
+        padding: 30px;
+
+        border-radius: 20px;
+
+        box-shadow: 0 5px 20px rgba(0, 0, 0, .08);
+
+    }
+
+    /* ACTIONS */
+
+    .action-card {
+
+        background: #f8fafc;
+
+        text-align: center;
+
+        display: block;
+
+        padding: 30px;
+
+        text-decoration: none;
+
+        color: #0f172a;
+
+        border-radius: 18px;
+
+        transition: .3s;
+
+        font-size: 30px;
+
+    }
+
+    .action-card:hover {
+
+        transform: translateY(-5px);
+
+        background: #2563eb;
+
+        color: white;
+
+    }
+
+    /* PROJECT */
+
+    .project-card {
+
+        background: #f8fafc;
+
+        padding: 20px;
+
+        border-radius: 15px;
+
+        margin-bottom: 15px;
+
+    }
+
+    /* NOTIFICATION */
+
+    .notification-item {
+
+        background: #f8fafc;
+
+        padding: 15px;
+
+        border-radius: 12px;
+
+        margin-bottom: 10px;
+
+    }
+
+    /* MOBILE */
+
+    @media(max-width:768px) {
+
+        .hero-section {
+
+            flex-direction: column;
+
+            text-align: center;
+
+        }
+
+        .hero-image img {
+
+            width: 100%;
+
+        }
+
+        .hero-content h1 {
+
+            font-size: 35px;
+
+        }
+
+    }
+</style>
+
+{% endblock %}

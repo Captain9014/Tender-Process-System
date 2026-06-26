@@ -1,0 +1,292 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid px-4 py-4">
+
+    <div class="chat-container">
+
+        <!-- HEADER -->
+
+        <div class="chat-header">
+
+            <h3 class="mb-0">
+                💬 Project Chat Room
+            </h3>
+
+            <span class="badge bg-success">
+                Online Communication
+            </span>
+
+        </div>
+
+        <!-- MESSAGES -->
+
+        <div class="chat-body">
+
+            {% for message in messages %}
+
+            {% if message.sender == request.user %}
+
+            <div class="message-row sent">
+
+                <div class="message-box sent-box">
+
+                    <small class="sender-name">
+
+                        You
+
+                    </small>
+
+                    <p class="mb-1">
+
+                        {{ message.text }}
+
+                    </p>
+                    {% if message.sender == request.user %}
+
+                    <div class="mt-2">
+
+                        <a href="/edit-message/{{message.id}}/" class="btn btn-sm btn-warning">
+
+                            ✏️
+
+                        </a>
+
+                        <a href="/delete-message/{{message.id}}/" class="btn btn-sm btn-danger">
+
+                            🗑️
+
+                        </a>
+
+                    </div>
+
+                    {% endif %}
+
+                </div>
+
+            </div>
+
+            {% else %}
+
+            <div class="message-row received">
+
+                <div class="message-box received-box">
+
+                    <small class="sender-name">
+
+                        {{ message.sender.username }}
+
+                    </small>
+
+                    <p class="mb-1">
+
+                        {{ message.text }}
+
+                    </p>
+
+                    <small class="text-light">
+
+                        {{ message.created_at|date:"d M Y h:i A" }}
+
+                    </small>
+                </div>
+
+            </div>
+
+            {% endif %}
+
+            {% empty %}
+
+            <div class="text-center text-muted mt-5">
+
+                No messages yet. Start the conversation.
+
+            </div>
+
+            {% endfor %}
+
+        </div>
+
+        <!-- SEND MESSAGE -->
+
+        <div class="chat-footer">
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                {{ form.as_p }}
+
+                <button type="submit" class="btn btn-primary w-100">
+
+                    Send Message
+
+                </button>
+
+            </form>
+
+        </div>
+
+    </div>
+
+
+</div>
+
+<style>
+    body {
+        background: #eef2f7;
+    }
+
+    .chat-container {
+
+        background: white;
+
+        border-radius: 20px;
+
+        overflow: hidden;
+
+        box-shadow: 0 8px 25px rgba(0, 0, 0, .08);
+
+    }
+
+    .chat-header {
+
+        background: linear-gradient(135deg,
+                #0f172a,
+                #1e3a8a);
+
+        color: white;
+
+        padding: 20px 25px;
+
+        display: flex;
+
+        justify-content: space-between;
+
+        align-items: center;
+
+    }
+
+    .chat-body {
+
+        height: 500px;
+
+        overflow-y: auto;
+
+        padding: 25px;
+
+        background: #f8fafc;
+
+    }
+
+    .message-row {
+
+        display: flex;
+
+        margin-bottom: 15px;
+
+    }
+
+    .sent {
+
+        justify-content: flex-end;
+
+    }
+
+    .received {
+
+        justify-content: flex-start;
+
+    }
+
+    .message-box {
+
+        max-width: 70%;
+
+        padding: 12px 15px;
+
+        border-radius: 15px;
+
+    }
+
+    .sent-box {
+
+        background: #2563eb;
+
+        color: white;
+
+    }
+
+    .received-box {
+
+        background: white;
+
+        border: 1px solid #ddd;
+
+    }
+
+    .sender-name {
+
+        font-weight: bold;
+
+        display: block;
+
+        margin-bottom: 5px;
+
+    }
+
+    .chat-footer {
+
+        padding: 20px;
+
+        background: white;
+
+        border-top: 1px solid #eee;
+
+    }
+
+    .chat-footer textarea {
+
+        width: 100%;
+
+        border: 1px solid #ddd;
+
+        border-radius: 12px;
+
+        padding: 12px;
+
+        min-height: 100px;
+
+    }
+
+    .chat-footer input {
+
+        width: 100%;
+
+        border: 1px solid #ddd;
+
+        border-radius: 12px;
+
+        padding: 12px;
+
+    }
+
+    @media(max-width:768px) {
+
+        .chat-body {
+
+            height: 400px;
+
+        }
+
+        .message-box {
+
+            max-width: 90%;
+
+        }
+
+    }
+</style>
+
+{% endblock %}

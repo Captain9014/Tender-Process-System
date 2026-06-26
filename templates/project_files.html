@@ -1,0 +1,55 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card-box">
+
+    <h2>
+        Project Files
+    </h2>
+
+    <hr>
+
+    {% for file in files %}
+
+    <div class="card-box mb-3">
+
+        <p>
+
+            <b>Uploaded By:</b>
+
+            {{file.uploaded_by.username}}
+
+        </p>
+
+        <p>
+
+            <b>Date:</b>
+
+            {{file.uploaded_at}}
+
+        </p>
+
+        <a href="{{file.file.url}}"
+           target="_blank"
+           class="btn btn-primary">
+
+            Download File
+
+        </a>
+
+    </div>
+
+    {% empty %}
+
+    <h4>
+
+        No Files Uploaded Yet
+
+    </h4>
+
+    {% endfor %}
+
+</div>
+
+{% endblock %}

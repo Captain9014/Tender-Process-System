@@ -1,0 +1,301 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="container-fluid px-4 py-4">
+
+    <!-- HEADER -->
+
+    <div class="page-header-custom">
+
+        <h2 class="mb-1">
+            📈 Project Progress Tracker
+        </h2>
+
+        <p class="mb-0">
+            Track construction updates and keep clients informed about project status.
+        </p>
+
+    </div>
+
+    <!-- INFO BOX -->
+
+    
+    <div class="row g-4">
+
+        <!-- LEFT SIDE -->
+
+        <div class="col-lg-4">
+
+            <div class="custom-card">
+
+                <h3 class="mb-2">
+
+                    Update Progress
+
+                </h3>
+
+                <p class="text-muted mb-4">
+
+                    Enter latest completion percentage and work details.
+
+                </p>
+
+                <form method="POST">
+
+                    {% csrf_token %}
+
+                    {{ form.as_p }}
+
+                    <button type="submit"
+                            class="btn btn-success w-100 py-2">
+
+                        Save Progress Update
+
+                    </button>
+
+                </form>
+
+            </div>
+
+        </div>
+
+        <!-- RIGHT SIDE -->
+
+        <div class="col-lg-8">
+
+            <div class="custom-card">
+
+                <h3 class="mb-1">
+
+                    Progress History
+
+                </h3>
+
+                <p class="text-muted mb-4">
+
+                    All project updates submitted by builder.
+
+                </p>
+
+                {% for update in updates %}
+
+                <div class="timeline-item">
+
+                    <div class="timeline-header">
+
+                        <span class="progress-badge">
+
+                            {{ update.progress }}%
+
+                        </span>
+
+                        <small class="text-muted">
+
+                            {{ update.created_at }}
+
+                        </small>
+
+                    </div>
+
+                    <h5 class="mt-3">
+
+                        Project {{ update.progress }}% Completed
+
+                    </h5>
+
+                    <p class="mb-0">
+
+                        {{ update.update_text }}
+
+                    </p>
+
+                </div>
+
+                {% empty %}
+
+                <div class="text-center py-5">
+
+                    <h4>
+
+                        No Updates Yet
+
+                    </h4>
+
+                    <p class="text-muted">
+
+                        Start adding progress updates for this project.
+
+                    </p>
+
+                </div>
+
+                {% endfor %}
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+body{
+    background:#eef2f7;
+}
+
+/* HEADER */
+
+.page-header-custom{
+
+    background:white;
+
+    padding:20px 25px;
+
+    border-radius:18px;
+
+    margin-bottom:20px;
+
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+
+}
+
+.page-header-custom h2{
+
+    color:#0f172a;
+
+    font-weight:700;
+
+}
+
+.page-header-custom p{
+
+    color:#64748b;
+
+}
+
+/* CARD */
+
+.custom-card{
+
+    background:white;
+
+    border-radius:20px;
+
+    padding:25px;
+
+    height:100%;
+
+    box-shadow:0 8px 25px rgba(0,0,0,.08);
+
+}
+
+/* FORM */
+
+input,
+textarea,
+select{
+
+    width:100%;
+
+    padding:12px;
+
+    border:1px solid #ddd;
+
+    border-radius:12px;
+
+    margin-bottom:15px;
+
+}
+
+input:focus,
+textarea:focus,
+select:focus{
+
+    outline:none;
+
+    border-color:#0d6efd;
+
+    box-shadow:0 0 10px rgba(13,110,253,.15);
+
+}
+
+/* TIMELINE */
+
+.timeline-item{
+
+    border-left:4px solid #198754;
+
+    padding-left:20px;
+
+    margin-bottom:25px;
+
+    position:relative;
+
+}
+
+.timeline-item::before{
+
+    content:'';
+
+    width:14px;
+
+    height:14px;
+
+    background:#198754;
+
+    border-radius:50%;
+
+    position:absolute;
+
+    left:-9px;
+
+    top:6px;
+
+}
+
+.timeline-header{
+
+    display:flex;
+
+    justify-content:space-between;
+
+    align-items:center;
+
+}
+
+.progress-badge{
+
+    background:#198754;
+
+    color:white;
+
+    padding:6px 15px;
+
+    border-radius:20px;
+
+    font-weight:bold;
+
+}
+
+/* MOBILE */
+
+@media(max-width:768px){
+
+    .timeline-header{
+
+        flex-direction:column;
+
+        align-items:flex-start;
+
+        gap:8px;
+
+    }
+
+}
+
+</style>
+
+{% endblock %}

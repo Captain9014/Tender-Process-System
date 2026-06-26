@@ -1,0 +1,150 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="row justify-content-center">
+
+    <div class="col-md-12">
+
+        <div class="card-box p-5">
+
+            <div class="text-center mb-5">
+
+                <h1 class="fw-bold">
+
+                    Create New Tender
+
+                </h1>
+
+                <p class="text-muted">
+
+                    Publish your construction project and receive bids from builders
+
+                </p>
+
+            </div>
+
+            <form method="POST">
+
+                {% csrf_token %}
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+
+                            Project Title
+
+                        </label>
+
+                        {{ form.title }}
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+
+                            Budget
+
+                        </label>
+
+                        {{ form.budget }}
+
+                    </div>
+
+                </div>
+
+                <div class="row">
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+
+                            Location
+
+                        </label>
+
+                        {{ form.location }}
+
+                    </div>
+
+                    <div class="col-md-6 mb-4">
+
+                        <label class="form-label fw-bold">
+
+                            Deadline
+
+                        </label>
+
+                        {{ form.deadline }}
+
+                    </div>
+
+                </div>
+
+                <div class="mb-4">
+
+                    <label class="form-label fw-bold">
+
+                        Project Description
+
+                    </label>
+
+                    {{ form.description }}
+
+                </div>
+
+                <div class="text-center mt-5">
+
+                    <button type="submit"
+                            class="blue-btn px-5">
+
+                        Submit Tender
+
+                    </button>
+
+                </div>
+
+            </form>
+
+        </div>
+
+    </div>
+
+</div>
+
+<style>
+
+input,
+textarea,
+select {
+
+    width: 100%;
+    padding: 8px;
+    border-radius: 12px;
+    border: 1px solid #dcdcdc;
+    outline: none;
+    margin-top: 8px;
+    transition: 0.3s;
+
+}
+
+input:focus,
+textarea:focus {
+
+    border: 1px solid #0d6efd;
+    box-shadow: 0px 0px 10px rgba(13,110,253,0.2);
+
+}
+
+textarea {
+
+    min-height: 50px;
+
+}
+
+</style>
+
+{% endblock %}
